@@ -14,6 +14,7 @@ class AttractionList extends Component {
               <Attraction
                 key={attraction.id}                
                 attraction={attraction}
+                {...this.props}
               />)
           }
         </article>

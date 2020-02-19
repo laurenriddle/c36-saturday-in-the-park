@@ -9,3 +9,11 @@
     display: flex;
     justify-content: space-between;
 }
+
+.itineraryList {
+    border: 1px solid gray;
+    padding: 2em;
+    width: 100%;
+    box-shadow: 5px 10px 15px rgba(72, 62, 23, 0.4);
+    
+}

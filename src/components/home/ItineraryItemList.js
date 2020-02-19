@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import AreaList from "./AreaList"
 import { isAuthenticated } from "../helpers/simpleAuth"
-import ItineraryCard from "./ItineraryCard"
+import IteneraryList from "./ItineraryList"
 
 class ItineraryItemList extends Component {
 
@@ -24,7 +24,7 @@ class ItineraryItemList extends Component {
         }
       })
         .then(response => response.json())
-        .then(response => console.log(this.setState({ items: response })))
+        .then(response => this.setState({ items: response }))
     }
   }
 
@@ -32,13 +32,8 @@ class ItineraryItemList extends Component {
     return (
       <>
         <main className="explorer">
-      
-          {
-          this.state.items.map(item =>
+        <IteneraryList items={this.state.items}/>
 
-          <ItineraryCard item={item} />
-          )
-          }
         </main>
       </>
     )

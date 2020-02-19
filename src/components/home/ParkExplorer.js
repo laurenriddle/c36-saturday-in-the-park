@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import AreaList from "./AreaList"
 import { isAuthenticated } from "../helpers/simpleAuth"
 import AttractionList from "./AttractionList"
+import { withRouter } from 'react-router-dom';
 
 class ParkExplorer extends Component {
 
@@ -50,12 +51,12 @@ class ParkExplorer extends Component {
     return (
       <>
         <main className="explorer">
-          <AreaList areas={this.state.areas} getAreaAttractions={this.getAreaAttractions}/>
-          <AttractionList attractions={this.state.attractions}/>
+          <AreaList areas={this.state.areas} getAreaAttractions={this.getAreaAttractions} {...this.props}/>
+          <AttractionList attractions={this.state.attractions} {...this.props}/>
         </main>
       </>
     )
   }
 }
 
-export default ParkExplorer
+export default withRouter(ParkExplorer)
