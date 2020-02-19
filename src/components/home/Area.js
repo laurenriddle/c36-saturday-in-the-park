@@ -6,9 +6,9 @@ class Area extends Component {
     return (
       <>
         <section className="parkArea">
-          <p>
+          <button onClick={() => this.props.getAreaAttractions(this.props.area.id)}>
             {this.props.area.name}
-          </p>
+          </button>
         </section>
       </>
     )

@@ -13,6 +13,7 @@ class AreaList extends Component {
               <Area
                 key={area.id}                
                 area={area}
+                getAreaAttractions={this.props.getAreaAttractions}
               />)
           }
         </article>

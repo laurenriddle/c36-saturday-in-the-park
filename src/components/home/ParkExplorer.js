@@ -1,11 +1,13 @@
 import React, { Component } from "react"
 import AreaList from "./AreaList"
 import { isAuthenticated } from "../helpers/simpleAuth"
+import AttractionList from "./AttractionList"
 
 class ParkExplorer extends Component {
 
   state = {
-    areas: []
+    areas: [],
+    attractions: []
   }
 
   componentDidMount() {
@@ -23,7 +25,24 @@ class ParkExplorer extends Component {
         }
       })
         .then(response => response.json())
-        .then(response => this.setState({ areas: response }))
+        .then(response => console.log(this.setState({ areas: response })))
+    }
+  }
+
+  getAreaAttractions = (area_id) => {
+    // get all park areas
+    // set state with new data for park areas
+    if (isAuthenticated()) {
+      fetch(`http://localhost:8000/attractions?area=${area_id}`, {
+        "headers": {
+          "Accept": "application/json",
+          "Authorization": `Token ${sessionStorage.getItem("kennywood_token")}`
+        }
+      })
+        .then(response => response.json())
+        .then((response) => {this.setState({ attractions: response }) 
+        console.log("Hello", this.state.attractions)})
+        
     }
   }
 
@@ -31,7 +50,8 @@ class ParkExplorer extends Component {
     return (
       <>
         <main className="explorer">
-          <AreaList areas={this.state.areas} />
+          <AreaList areas={this.state.areas} getAreaAttractions={this.getAreaAttractions}/>
+          <AttractionList attractions={this.state.attractions}/>
         </main>
       </>
     )
