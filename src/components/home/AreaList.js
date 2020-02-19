@@ -8,6 +8,7 @@ class AreaList extends Component {
     return (
       <>
         <article className="explorerList">
+          <h4>Areas:</h4>
           {
             this.props.areas.map(area =>
               <Area
