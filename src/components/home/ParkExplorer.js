@@ -41,8 +41,7 @@ class ParkExplorer extends Component {
         }
       })
         .then(response => response.json())
-        .then((response) => {this.setState({ attractions: response }) 
-        console.log("Hello", this.state.attractions)})
+        .then((response) => {this.setState({ attractions: response })})
         
     }
   }

@@ -6,6 +6,7 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import ItineraryItemList from "./home/ItineraryItemList"
 import SaveForm from "./home/SaveForm"
+import EditForm from "./home/EditForm"
 
 class ApplicationViews extends Component {
 
@@ -14,7 +15,6 @@ class ApplicationViews extends Component {
       <React.Fragment>
         <Route
           exact path="/" render={props => {
-            console.log("props", props)
             return <ParkExplorer {...props} />
           }}
         />
@@ -36,6 +36,11 @@ class ApplicationViews extends Component {
          <Route
           exact path="/myitinerary/new" render={props => {
             return <SaveForm {...props} />
+          }}
+        />
+         <Route
+           path="/myitinerary/:itemId(\d+)/edit" render={props => {
+            return <EditForm {...props} />
           }}
         />
       </React.Fragment>

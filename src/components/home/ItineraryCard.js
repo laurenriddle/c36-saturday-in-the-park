@@ -9,7 +9,7 @@ class Area extends Component {
           {/* <h4>{this.props.item.attraction.area.name}</h4> */}
           {/* <h5>{this.props.item.attraction.area.theme} </h5> */}
           <span>
-          <p>{this.props.item.starttime}: {this.props.item.attraction.name} <Link to='/myitinerary'>Edit</Link></p>
+          <p>{this.props.item.starttime}: {this.props.item.attraction.name}  <Link className="nav-link" to={`/myitinerary/${this.props.item.id}/edit`}>Edit</Link></p>
           </span>
         </section>
       </>
