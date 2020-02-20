@@ -6,8 +6,8 @@ import { isAuthenticated } from "../helpers/simpleAuth"
 class EditForm extends Component {
 
   state = {
-    starttime: "",
-    attraction_id: ""
+    starttime: null,
+    attraction_name: null
   }
 
   handleInputChange = (evt) => {
@@ -16,50 +16,69 @@ class EditForm extends Component {
     this.setState(stateToChange)
   }
 
-
-
-  EditAttraction = () => {
+  componentDidMount = () => {
     if (isAuthenticated()) {
-      fetch(`http://localhost:8000/itineraryitems`, {
-        "method": "PUT",
+      fetch(`http://localhost:8000/itineraryitems/${this.props.match.params.itemId}`, {
         "headers": {
           "Content-Type": "application/json",
           "Accept": "application/json",
           "Authorization": `Token ${sessionStorage.getItem("kennywood_token")}`
-        },
-        "body": JSON.stringify({
-          "attraction_id": this.props.location.state.attraction.id,
-          "starttime": Number(this.state.starttime)
-        })
+        }
       })
-
         .then(response => response.json())
-        .then(() => {
-          this.props.history.push("/myitinerary")
+        .then((response) => {
+          console.log(response)
+          this.setState({
+            starttime: response.starttime,
+            attraction_name: response.attraction.name
+          })
+          console.log(this.state)
         })
-
+        
     }
+  }
+
+
+
+
+  updateItineraryItem = () => {
+    fetch(`http://localhost:8000/itineraryitems/${this.props.match.params.itemId}`, {
+      "method": "PUT",
+      "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Token ${sessionStorage.getItem("kennywood_token")}`
+      },
+      "body": JSON.stringify({
+        "attraction_id": this.props.match.params.itemId,
+        "starttime": this.state.starttime
+      })
+    })
+    .then(() => {
+        this.props.history.push("/myitinerary")
+    })
   }
 
 
   render() {
     return (
-      <main style={{ textAlign: "center" }}>
+      <main style={{ textAlign: "center" }} >
         <fieldset className="form--login">
-          <label htmlFor="inputStarttime"> When do you want to ride {this.props.location.state.attraction.area.name}? </label>
+          <label htmlFor="inputStarttime"> When do you want to ride ? </label>
           <input onChange={this.handleInputChange}
             type="starttime"
             id="starttime"
             className="form-control"
             placeholder="Start Time"
+            value={this.state.starttime}
             required autoFocus />
         </fieldset>
 
-        <button onClick={this.SaveAttraction}>
-          Add to Itinerary
+        <button onClick={this.updateItineraryItem}>
+          Save
           </button>
 
-      </main>
+      </main >
 
     )
   }
